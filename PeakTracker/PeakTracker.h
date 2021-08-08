@@ -14,5 +14,11 @@ class PeakTracker: public BakkesMod::Plugin::BakkesModPlugin, public BakkesMod::
 	void RenderSettings() override;
 	std::string GetPluginName() override;
 	void SetImGuiContext(uintptr_t ctx) override;
+
+	void GameStart(std::string eventName);
+	void GameEnd(std::string eventName);
+	bool isGameStarted = false;
+	void OutputMMR(float mmr);
+	void UpdateMMR(int playlist, float mmr);
 };
 
