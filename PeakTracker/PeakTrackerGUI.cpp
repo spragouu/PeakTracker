@@ -23,42 +23,75 @@ void PeakTracker::RenderSettings()
 	int casualMMR = cvarManager->getCvar("casualMMR").getIntValue();
 
 	ImGui::TextUnformatted("Standard Modes");
-
-	int tempValue = 1587; // Will be replaced with peak MMR for specific game mode
 	if (ImGui::InputInt("3v3", &standardMMR, 0, 10000))
 	{
-		// Set Value
+		cvarManager->getCvar("standardMMR").setValue(standardMMR);
 	}
+	if (ImGui::IsItemHovered())
+	{
+		ImGui::SetTooltip("Manually update 3v3 peak");
+	}
+
 	if (ImGui::InputInt("2v2", &doublesMMR, 0, 10000))
 	{
-		// Set Value
+		cvarManager->getCvar("doublesMMR").setValue(doublesMMR);
 	}
+	if (ImGui::IsItemHovered())
+	{
+		ImGui::SetTooltip("Manually update 2v2 peak");
+	}
+
 	if (ImGui::InputInt("1v1", &duelMMR, 0, 10000))
 	{
-		// Set Value
+		cvarManager->getCvar("duelMMR").setValue(duelMMR);
 	}
+	if (ImGui::IsItemHovered())
+	{
+		ImGui::SetTooltip("Manually update 1v1 peak");
+	}
+
 	ImGui::Separator();
 	ImGui::TextUnformatted("Extra Modes");
 	if (ImGui::InputInt("Rumble", &rumbleMMR, 0, 10000))
 	{
-		// Set Value
+		cvarManager->getCvar("rumbleMMR").setValue(rumbleMMR);
 	}
+	if (ImGui::IsItemHovered())
+	{
+		ImGui::SetTooltip("Manually update Rumble peak");
+	}
+
 	if (ImGui::InputInt("Snow Day", &snowdayMMR, 0, 10000))
 	{
-		// Set Value
+		cvarManager->getCvar("snowdayMMR").setValue(snowdayMMR);
 	}
+	if (ImGui::IsItemHovered())
+	{
+		ImGui::SetTooltip("Manually update Snow Day peak");
+	}
+
 	if (ImGui::InputInt("Dropshot", &dropshotMMR, 0, 10000))
 	{
-		// Set Value
+		cvarManager->getCvar("dropshotMMR").setValue(dropshotMMR);
 	}
+	if (ImGui::IsItemHovered())
+	{
+		ImGui::SetTooltip("Manually update Dropshot peak");
+	}
+
 	if (ImGui::InputInt("Hoops", &hoopsMMR, 0, 10000))
 	{
-		// Set Value
+		cvarManager->getCvar("hoopsMMR").setValue(hoopsMMR);
 	}
+	if (ImGui::IsItemHovered())
+	{
+		ImGui::SetTooltip("Manually update Hoops peak");
+	}
+
 	ImGui::Separator();
 	if (ImGui::InputInt("Casual", &casualMMR, 0, 10000))
 	{
-		// Set Value
+		cvarManager->getCvar("casualMMR").setValue(casualMMR);
 	}
 	ImGui::Separator();
 	ImGui::TextUnformatted("Developed by @spragouu");

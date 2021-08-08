@@ -36,7 +36,7 @@ void PeakTracker::onUnload()
 
 void PeakTracker::GameStart(std::string eventName)
 {
-	if (!gameWrapper->IsInOnlineGame() || isGameStarted) return;
+	if (!gameWrapper->IsInOnlineGame()) return;
 
 	MMRWrapper mmrw = gameWrapper->GetMMRWrapper();
 	int currentPlaylist = mmrw.GetCurrentPlaylist();
@@ -47,6 +47,7 @@ void PeakTracker::GameStart(std::string eventName)
 
 	UpdateMMR(currentPlaylist, currentMMR);
 }
+
 void PeakTracker::GameEnd(std::string eventName)
 {
 	if (!gameWrapper->IsInOnlineGame()) return;
@@ -57,6 +58,7 @@ void PeakTracker::GameEnd(std::string eventName)
 
 	UpdateMMR(currentPlaylist, currentMMR);
 }
+
 void PeakTracker::OutputMMR(float mmr)
 {
 	std::string output;
@@ -74,6 +76,7 @@ void PeakTracker::OutputMMR(float mmr)
 		cvarManager->log("Value to write was: " + output);
 	}
 }
+
 void PeakTracker::UpdateMMR(int playlist, float mmr) 
 {
 	switch (playlist)
@@ -127,6 +130,7 @@ void PeakTracker::UpdateMMR(int playlist, float mmr)
 			OutputMMR(mmr);
 		}
 		break;
+	// Following cases are for testing. Remove before publishing.
 	case 6:
 	case 1:
 	case 2:

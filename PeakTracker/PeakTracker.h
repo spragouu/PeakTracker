@@ -17,7 +17,6 @@ class PeakTracker: public BakkesMod::Plugin::BakkesModPlugin, public BakkesMod::
 
 	void GameStart(std::string eventName);
 	void GameEnd(std::string eventName);
-	bool isGameStarted = false;
 	void OutputMMR(float mmr);
 	void UpdateMMR(int playlist, float mmr);
 };
