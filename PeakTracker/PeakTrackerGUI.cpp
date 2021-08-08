@@ -26,6 +26,7 @@ void PeakTracker::RenderSettings()
 	if (ImGui::InputInt("3v3", &standardMMR, 0, 10000))
 	{
 		cvarManager->getCvar("standardMMR").setValue(standardMMR);
+		OutputMMR(static_cast<float>(standardMMR), "standardMMR");
 	}
 	if (ImGui::IsItemHovered())
 	{
@@ -35,6 +36,7 @@ void PeakTracker::RenderSettings()
 	if (ImGui::InputInt("2v2", &doublesMMR, 0, 10000))
 	{
 		cvarManager->getCvar("doublesMMR").setValue(doublesMMR);
+		OutputMMR(static_cast<float>(doublesMMR), "doublesMMR");
 	}
 	if (ImGui::IsItemHovered())
 	{
@@ -44,6 +46,7 @@ void PeakTracker::RenderSettings()
 	if (ImGui::InputInt("1v1", &duelMMR, 0, 10000))
 	{
 		cvarManager->getCvar("duelMMR").setValue(duelMMR);
+		OutputMMR(static_cast<float>(duelMMR), "duelMMR");
 	}
 	if (ImGui::IsItemHovered())
 	{
@@ -55,6 +58,7 @@ void PeakTracker::RenderSettings()
 	if (ImGui::InputInt("Rumble", &rumbleMMR, 0, 10000))
 	{
 		cvarManager->getCvar("rumbleMMR").setValue(rumbleMMR);
+		OutputMMR(static_cast<float>(rumbleMMR), "rumbleMMR");
 	}
 	if (ImGui::IsItemHovered())
 	{
@@ -64,6 +68,7 @@ void PeakTracker::RenderSettings()
 	if (ImGui::InputInt("Snow Day", &snowdayMMR, 0, 10000))
 	{
 		cvarManager->getCvar("snowdayMMR").setValue(snowdayMMR);
+		OutputMMR(static_cast<float>(snowdayMMR), "snowdayMMR");
 	}
 	if (ImGui::IsItemHovered())
 	{
@@ -73,6 +78,7 @@ void PeakTracker::RenderSettings()
 	if (ImGui::InputInt("Dropshot", &dropshotMMR, 0, 10000))
 	{
 		cvarManager->getCvar("dropshotMMR").setValue(dropshotMMR);
+		OutputMMR(static_cast<float>(dropshotMMR), "dropshotMMR");
 	}
 	if (ImGui::IsItemHovered())
 	{
@@ -82,6 +88,7 @@ void PeakTracker::RenderSettings()
 	if (ImGui::InputInt("Hoops", &hoopsMMR, 0, 10000))
 	{
 		cvarManager->getCvar("hoopsMMR").setValue(hoopsMMR);
+		OutputMMR(static_cast<float>(hoopsMMR), "hoopsMMR");
 	}
 	if (ImGui::IsItemHovered())
 	{
@@ -92,6 +99,7 @@ void PeakTracker::RenderSettings()
 	if (ImGui::InputInt("Casual", &casualMMR, 0, 10000))
 	{
 		cvarManager->getCvar("casualMMR").setValue(casualMMR);
+		OutputMMR(static_cast<float>(casualMMR), "casualMMR");
 	}
 	ImGui::Separator();
 	ImGui::TextUnformatted("Developed by @spragouu");
