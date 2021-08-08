@@ -70,8 +70,7 @@ void PeakTracker::OutputMMR(float mmr, std::string outputFile)
 		stream.close();
 	}
 	else {
-		cvarManager->log("Can't write to file: " + outputFile + ".txt");
-		cvarManager->log("Value to write was: " + output);
+		cvarManager->log("Failed to updated MMR in: " + outputFile + ".txt");
 	}
 }
 
@@ -163,7 +162,7 @@ void PeakTracker::LoadExistingMMR()
 				stream.close();
 				cvarManager->log("MMR value found: " + std::to_string(mmr));
 
-				// Only call to update cvar when mmr is higher than zero since cvar default is 0.
+				// Only call to update cvar when mmr is higher than 0 since cvar default is 0.
 				if (mmr > 0)
 				{
 					cvarManager->getCvar(mmrFile).setValue(mmr);
