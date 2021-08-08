@@ -33,7 +33,6 @@ void PeakTracker::onLoad()
 
 void PeakTracker::onUnload()
 {
-	_globalCvarManager = cvarManager;
 	cvarManager->log("PeakTracker unloaded!");
 }
 
@@ -44,9 +43,6 @@ void PeakTracker::GameStart(std::string eventName)
 	MMRWrapper mmrw = gameWrapper->GetMMRWrapper();
 	int currentPlaylist = mmrw.GetCurrentPlaylist();
 	float currentMMR = mmrw.GetPlayerMMR(gameWrapper->GetUniqueID(), currentPlaylist);
-
-	/*cvarManager->getCvar("casualMMR").setValue(mmrw.GetPlayerMMR(gameWrapper->GetUniqueID(), mmrw.GetCurrentPlaylist()));
-	cvarManager->log(std::to_string(mmrw.GetPlayerMMR(gameWrapper->GetUniqueID(), mmrw.GetCurrentPlaylist())));*/
 
 	UpdateMMR(currentPlaylist, currentMMR);
 }
@@ -150,30 +146,46 @@ void PeakTracker::UpdateMMR(int playlist, float mmr)
 
 void PeakTracker::LoadExistingMMR()
 {
-	// Try to create plugin directory - Return will be 0 if the directory didn't exist and was created.
+	// Try to create PeakTracker directory.
 	std::string pluginDirectory = gameWrapper->GetBakkesModPath().string() + "\\PeakTracker";
 	if (_mkdir(pluginDirectory.c_str()) != 0)
 	{
-		// Directory already exists - Pull MMR values from files.
+		cvarManager->log("PeakTracker directory found!");
+		cvarManager->log("===== Loading saved MMR START =====");
 		for (std::string mmrFile : mmrFiles)
 		{
+			cvarManager->log("Attempting to pull mmr from: " + mmrFile + ".txt");
 			int mmr = 0;
 			std::ifstream stream(pluginDirectory + "\\" + mmrFile + ".txt");
 			if (stream.is_open())
 			{
 				stream >> mmr;
 				stream.close();
+				cvarManager->log("MMR value found: " + std::to_string(mmr));
+
+				// Only call to update cvar when mmr is higher than zero since cvar default is 0.
+				if (mmr > 0)
+				{
+					cvarManager->getCvar(mmrFile).setValue(mmr);
+				}
 			}
-			// Only call to update cvar when mmr is higher than zero.
-			if (mmr > 0)
+			else
 			{
-				cvarManager->getCvar(mmrFile).setValue(mmr);
+				cvarManager->log(mmrFile + ".txt doesn't exist - Creating it now!");
+				std::ofstream outStream(pluginDirectory + "\\" + mmrFile + ".txt");
+				if (outStream.is_open()) {
+					outStream << cvarManager->getCvar(mmrFile).getIntValue();
+					outStream.close();
+					cvarManager->log("Created file: " + mmrFile + ".txt");
+				}
 			}
 		}
+		cvarManager->log("===== Loading saved MMR END =====");
 	}
 	else
 	{
-		// PeakTracker didn't exist so it was created - Create default files MMR files.
+		cvarManager->log("PeakTracker directory created!");
+		cvarManager->log("===== Create default files START =====");
 		for (std::string mmrFile : mmrFiles)
 		{
 			std::ofstream stream(pluginDirectory + "\\" + mmrFile + ".txt");
@@ -183,5 +195,6 @@ void PeakTracker::LoadExistingMMR()
 				cvarManager->log("Created file: " + mmrFile + ".txt");
 			}
 		}
+		cvarManager->log("===== Create default files END =====");
 	}
 }
