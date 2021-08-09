@@ -25,16 +25,11 @@ void PeakTracker::onLoad()
 	cvarManager->registerCvar("dropshotMMR", "0", "Dropshot MMR", true, true, 0, true, 10000, true);
 	cvarManager->registerCvar("hoopsMMR", "0", "Hoops MMR", true, true, 0, true, 10000, true);
 	cvarManager->registerCvar("snowdayMMR", "0", "Snowday MMR", true, true, 0, true, 10000, true);
-	// Causal MMR for testing
-	cvarManager->registerCvar("casualMMR", "0", "Casual MMR", true, true, 0, true, 10000, true);
 
 	LoadExistingMMR();
 }
 
-void PeakTracker::onUnload()
-{
-	cvarManager->log("PeakTracker unloaded!");
-}
+void PeakTracker::onUnload(){}
 
 void PeakTracker::GameStart(std::string eventName)
 {
@@ -125,17 +120,6 @@ void PeakTracker::UpdateMMR(int playlist, float mmr)
 		{
 			cvarManager->getCvar("snowdayMMR").setValue(mmr);
 			OutputMMR(mmr, "snowdayMMR");
-		}
-		break;
-	// Following cases are for testing. Remove before publishing.
-	case 6:
-	case 1:
-	case 2:
-	case 3:
-		if (cvarManager->getCvar("casualMMR").getFloatValue() < mmr)
-		{
-			cvarManager->getCvar("casualMMR").setValue(mmr);
-			OutputMMR(mmr, "casualMMR");
 		}
 		break;
 	default:

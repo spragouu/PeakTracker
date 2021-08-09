@@ -20,7 +20,6 @@ void PeakTracker::RenderSettings()
 	int dropshotMMR = cvarManager->getCvar("dropshotMMR").getIntValue();
 	int hoopsMMR = cvarManager->getCvar("hoopsMMR").getIntValue();
 	int snowdayMMR = cvarManager->getCvar("snowdayMMR").getIntValue();
-	int casualMMR = cvarManager->getCvar("casualMMR").getIntValue();
 
 	ImGui::TextUnformatted("Standard Modes");
 	if (ImGui::InputInt("3v3", &standardMMR, 0, 10000))
@@ -95,12 +94,6 @@ void PeakTracker::RenderSettings()
 		ImGui::SetTooltip("Manually update Hoops peak");
 	}
 
-	ImGui::Separator();
-	if (ImGui::InputInt("Casual", &casualMMR, 0, 10000))
-	{
-		cvarManager->getCvar("casualMMR").setValue(casualMMR);
-		OutputMMR(static_cast<float>(casualMMR), "casualMMR");
-	}
 	ImGui::Separator();
 	ImGui::TextUnformatted("Developed by @spragouu");
 }

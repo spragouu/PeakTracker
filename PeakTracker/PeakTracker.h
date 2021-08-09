@@ -21,15 +21,14 @@ class PeakTracker: public BakkesMod::Plugin::BakkesModPlugin, public BakkesMod::
 	void UpdateMMR(int playlist, float mmr);
 	void LoadExistingMMR();
 
-	std::string mmrFiles[8] = {
+	std::string mmrFiles[7] = {
 		"duelMMR",
 		"doublesMMR",
 		"standardMMR",
 		"rumbleMMR",
 		"dropshotMMR",
 		"snowdayMMR",
-		"hoopsMMR",
-		"casualMMR"
+		"hoopsMMR"
 	};
 };
 
