@@ -163,6 +163,36 @@ void PeakTracker::LoadExistingMMR()
 				}
 			}
 		}
+		std::string csvFirstLine;
+		std::ifstream stream(pluginDirectory + "\\PeakTracker.csv");
+		if (stream.is_open())
+		{
+			std::getline(stream, csvFirstLine);
+			stream.close();
+			cvarManager->log("PeakTracker.csv found! Validating structure...");
+
+			// Only call to update cvar when mmr is higher than 0 since cvar default is 0.
+			if (csvFirstLine == "GameMode,PeakMMR,Rank,DateAchieved")
+			{
+				cvarManager->log("PeakTracker.csv successfully validated!");
+			}
+			else
+			{
+				cvarManager->log("PeakTracker.csv failed validation!");
+				cvarManager->log("Expected: GameMode,PeakMMR,Rank,DateAchieved");
+				cvarManager->log("Recieved: " + csvFirstLine);
+			}
+		}
+		else
+		{
+			cvarManager->log("PeakTracker.csv doesn't exist - Creating it now!");
+			std::ofstream outStream(pluginDirectory + "\\PeakTracker.csv");
+			if (outStream.is_open()) {
+				outStream << "GameMode,PeakMMR,Rank,DateAchieved" << std::endl;
+				outStream.close();
+				cvarManager->log("Created file: PeakTracker.csv");
+			}
+		}
 		cvarManager->log("===== Loading saved MMR END =====");
 	}
 	else
@@ -177,6 +207,12 @@ void PeakTracker::LoadExistingMMR()
 				stream.close();
 				cvarManager->log("Created file: " + mmrFile + ".txt");
 			}
+		}
+		std::ofstream stream(pluginDirectory + "\\PeakTracker.csv");
+		if (stream.is_open()) {
+			stream << "GameMode,PeakMMR,Rank,DateAchieved" << std::endl;
+			stream.close();
+			cvarManager->log("Created file: PeakTracker.csv");
 		}
 		cvarManager->log("===== Create default files END =====");
 	}
