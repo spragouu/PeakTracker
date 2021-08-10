@@ -12,23 +12,25 @@ PeakTracker initially will set your peak to your current MMR for each gamemode (
 If your peak MMR is higher than your current MMR then you can manually set your peak through the in game menu!
 
 ### In-Game Menu
-![In Game Menu](https://media.discordapp.net/attachments/720041712390635628/874102199880388628/unknown.png)
+![In-Game Menu](https://media.discordapp.net/attachments/720041712390635628/874102199880388628/unknown.png)
 
 To get to this menu, while in-game press **F2** to open the BakkesMod Menu. Then select the **Plugins** tab, then finally select the **PeakTracker** plugin from the list that appears on the left.
 
 All this information is saved in various text files in the following location: 
  - **%appdata%\Roaming\bakkesmod\bakkesmod\PeakTracker**
 
-### CSV Output (Not Implemented Yet)
+### CSV Output
 
-All peak information will be outputted in addition to the various text files a CSV file. The CSV file will contain more detailed information for the specific peak such as date achieved, associated rank (Diamond I, etc.), and more.
+![CSV Output](https://media.discordapp.net/attachments/720041712390635628/874459489351381032/unknown.png)
+
+All peak information will be outputted in addition to the various text files a CSV file. The CSV file will contain more detailed information about the specific peak as shown in the screenshot above.
 
 This will allow you to track your peak MMR progression over time or display the information anyway you want through something like Excel or a custom program! Let your imagination run wild! 🤯
 
 The CSV file is available in the following location:
  - **%appdata%\Roaming\bakkesmod\bakkesmod\PeakTracker\PeakTracker.csv**
 
-**This specific feature is still a work in progress and once implemented a screenshot of the additional data that's being captured will be added :)**
+Instead of modifying this file directly it's reccommend that you make a copy that you then modify the copy. However, if you insist on modifying the original file make sure to leave the first line unmodified and always have an empty line at the end of the file otherwise there could be errors.
 
 ### OBS Intergration
 
@@ -43,6 +45,6 @@ All text files are located in the following location:
 
 This project is available for free under the MIT license, feel free to do whatever you want with the code except blame me if you break something! 😅
 
-I'd also like the say thanks to the BakkesMod Plugin community for helping me with any questions I had and for their great tutorials that got the ball rolling for me! 
+Thank you to the BakkesMod Plugin community for helping me with any questions I had and for their great tutorials that got the ball rolling for me! Also thank you to my lovely girlfriend for making the logo!
 
 **Happy Peaking!**
