@@ -1,6 +1,20 @@
-# PeakTracker 📈
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/spragouu/PeakTracker">
+    <img src="https://media.discordapp.net/attachments/720041712390635628/874468669030268928/Webp.net-resizeimage_1.png?width=683&height=683" alt="Logo" width="220" height="200">
+  </a>
 
-PeakTracker is a plugin for [Bakkesmod](https://www.bakkesmod.com/) that tracks the users peak (aka. highest achieved) MMR for all ranked gamemodes in Rocket League.
+  <h3 align="center">PeakTracker</h3>
+
+  <p align="center">
+    An awesome BakkesMod Plugin to keep track of your Peak MMR!
+  </p>
+</p>
+
+#
+
+PeakTracker is a plugin for [Bakkesmod](https://www.bakkesmod.com/) that tracks the users peak MMR (aka. highest achieved MMR) for all ranked gamemodes in Rocket League.
 
 ## Installation
  - Download and install [Bakkesmod](https://www.bakkesmod.com/). 
