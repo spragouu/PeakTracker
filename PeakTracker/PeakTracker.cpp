@@ -38,8 +38,13 @@ void PeakTracker::GameStart(std::string eventName)
 	MMRWrapper mmrw = gameWrapper->GetMMRWrapper();
 	int currentPlaylist = mmrw.GetCurrentPlaylist();
 	float currentMMR = mmrw.GetPlayerMMR(gameWrapper->GetUniqueID(), currentPlaylist);
+	SkillRank skillRank = mmrw.GetPlayerRank(gameWrapper->GetUniqueID(), currentPlaylist);
 
-	UpdateMMR(currentPlaylist, currentMMR);
+	// Only want to update MMR if player had finished their placement matches
+	if (skillRank.MatchesPlayed >= 10)
+	{
+		UpdateMMR(currentPlaylist, currentMMR, skillRank);
+	}
 }
 
 void PeakTracker::GameEnd(std::string eventName)
@@ -49,8 +54,13 @@ void PeakTracker::GameEnd(std::string eventName)
 	MMRWrapper mmrw = gameWrapper->GetMMRWrapper();
 	int currentPlaylist = mmrw.GetCurrentPlaylist();
 	float currentMMR = mmrw.GetPlayerMMR(gameWrapper->GetUniqueID(), currentPlaylist);
+	SkillRank skillRank = mmrw.GetPlayerRank(gameWrapper->GetUniqueID(), currentPlaylist);
 
-	UpdateMMR(currentPlaylist, currentMMR);
+	// Only want to update MMR if player had finished their placement matches
+	if (skillRank.MatchesPlayed >= 10)
+	{
+		UpdateMMR(currentPlaylist, currentMMR, skillRank);
+	}
 }
 
 void PeakTracker::OutputMMR(float mmr, std::string outputFile)
@@ -69,7 +79,7 @@ void PeakTracker::OutputMMR(float mmr, std::string outputFile)
 	}
 }
 
-void PeakTracker::UpdateMMR(int playlist, float mmr) 
+void PeakTracker::UpdateMMR(int playlist, float mmr, SkillRank rank) 
 {
 	switch (playlist)
 	{
@@ -78,6 +88,7 @@ void PeakTracker::UpdateMMR(int playlist, float mmr)
 		{
 			cvarManager->getCvar("duelMMR").setValue(mmr);
 			OutputMMR(mmr, "duelMMR");
+			OutputCSV("Duel", mmr, rank);
 		}
 		break;
 	case 11:
@@ -85,6 +96,7 @@ void PeakTracker::UpdateMMR(int playlist, float mmr)
 		{
 			cvarManager->getCvar("doublesMMR").setValue(mmr);
 			OutputMMR(mmr, "doublesMMR");
+			OutputCSV("Doubles", mmr, rank);
 		}
 		break;
 	case 13:
@@ -92,6 +104,7 @@ void PeakTracker::UpdateMMR(int playlist, float mmr)
 		{
 			cvarManager->getCvar("standardMMR").setValue(mmr);
 			OutputMMR(mmr, "standardMMR");
+			OutputCSV("Standard", mmr, rank);
 		}
 		break;
 	case 27:
@@ -99,6 +112,7 @@ void PeakTracker::UpdateMMR(int playlist, float mmr)
 		{
 			cvarManager->getCvar("hoopsMMR").setValue(mmr);
 			OutputMMR(mmr, "hoopsMMR");
+			OutputCSV("Hoops", mmr, rank);
 		}
 		break;
 	case 28:
@@ -106,6 +120,7 @@ void PeakTracker::UpdateMMR(int playlist, float mmr)
 		{
 			cvarManager->getCvar("rumbleMMR").setValue(mmr);
 			OutputMMR(mmr, "rumbleMMR");
+			OutputCSV("Rumble", mmr, rank);
 		}
 		break;
 	case 29:
@@ -113,6 +128,7 @@ void PeakTracker::UpdateMMR(int playlist, float mmr)
 		{
 			cvarManager->getCvar("dropshotMMR").setValue(mmr);
 			OutputMMR(mmr, "dropshotMMR");
+			OutputCSV("Dropshot", mmr, rank);
 		}
 		break;
 	case 30:
@@ -120,10 +136,36 @@ void PeakTracker::UpdateMMR(int playlist, float mmr)
 		{
 			cvarManager->getCvar("snowdayMMR").setValue(mmr);
 			OutputMMR(mmr, "snowdayMMR");
+			OutputCSV("SnowDay", mmr, rank);
 		}
 		break;
 	default:
 		break;
+	}
+}
+
+void PeakTracker::OutputCSV(std::string gameMode, float peakMMR, SkillRank skillRank)
+{
+	// Get current date in the following format - DD/MM/YYYY
+	const int MAXLEN = 15;
+	char date[MAXLEN];
+	time_t myTime = time(0);
+	strftime(date, MAXLEN, "%d/%m/%Y", localtime(&myTime));
+	std::string currentDate(date);
+
+	int mmr = static_cast<int>(peakMMR);
+	std::string rank = GetRank(skillRank.Tier) + " Div " + std::to_string(skillRank.Division + 1);
+
+	std::string output = (gameMode + "," + std::to_string(mmr) + "," + rank + "," + currentDate);
+
+	std::ofstream stream(gameWrapper->GetBakkesModPath().string() + "\\PeakTracker\\PeakTracker.csv", std::ios::out | std::ios::app);
+
+	if (stream.is_open()) {
+		stream << output << std::endl;
+		stream.close();
+	}
+	else {
+		cvarManager->log("Failed to update PeakTracker.csv");
 	}
 }
 
@@ -215,5 +257,84 @@ void PeakTracker::LoadExistingMMR()
 			cvarManager->log("Created file: PeakTracker.csv");
 		}
 		cvarManager->log("===== Create default files END =====");
+	}
+}
+
+std::string PeakTracker::GetRank(int rankID)
+{
+	switch (rankID)
+	{
+	case 0:
+		return "Unranked";
+		break;
+	case 1:
+		return "Bronze I";
+		break;
+	case 2:
+		return "Bronze II";
+		break;
+	case 3:
+		return "Bronze III";
+		break;
+	case 4:
+		return "Silver I";
+		break;
+	case 5:
+		return "Silver II";
+		break;
+	case 6:
+		return "Silver III";
+		break;
+	case 7:
+		return "Gold I";
+		break;
+	case 8:
+		return "Gold II";
+		break;
+	case 9:
+		return "Gold III";
+		break;
+	case 10:
+		return "Platinum I";
+		break;
+	case 11:
+		return "Platinum II";
+		break;
+	case 12:
+		return "Platinum III";
+		break;
+	case 13:
+		return "Diamond I";
+		break;
+	case 14:
+		return "Diamond II";
+		break;
+	case 15:
+		return "Diamond III";
+		break;
+	case 16:
+		return "Champion I";
+		break;
+	case 17:
+		return "Champion II";
+		break;
+	case 18:
+		return "Champion III";
+		break;
+	case 19:
+		return "Grand Champion I";
+		break;
+	case 20:
+		return "Grand Champion II";
+		break;
+	case 21:
+		return " Grand Champion III";
+		break;
+	case 22:
+		return "Supersonic Legend";
+		break;
+	default:
+		return "Unknown";
+		break;
 	}
 }

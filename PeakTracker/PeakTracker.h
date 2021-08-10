@@ -18,8 +18,10 @@ class PeakTracker: public BakkesMod::Plugin::BakkesModPlugin, public BakkesMod::
 	void GameStart(std::string eventName);
 	void GameEnd(std::string eventName);
 	void OutputMMR(float mmr, std::string outputFile);
-	void UpdateMMR(int playlist, float mmr);
+	void OutputCSV(std::string gameMode, float peakMMR, SkillRank rank);
+	void UpdateMMR(int playlist, float mmr, SkillRank rank);
 	void LoadExistingMMR();
+	std::string GetRank(int rankID);
 
 	std::string mmrFiles[7] = {
 		"duelMMR",
