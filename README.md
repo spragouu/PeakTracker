@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/spragouu/PeakTracker">
+  <a href="https://bakkesplugins.com/plugins/view/274">
     <img src="https://media.discordapp.net/attachments/720041712390635628/874468669030268928/Webp.net-resizeimage_1.png?width=683&height=683" alt="Logo" width="220" height="200">
   </a>
 
@@ -17,8 +17,19 @@
 PeakTracker is a plugin for [Bakkesmod](https://www.bakkesmod.com/) that tracks the users peak MMR (aka. highest achieved MMR) for all ranked gamemodes in Rocket League.
 
 ## Installation
+There are two routes to install plugins either though the in-game plugin manager or from the plugin website, both take only a few seconds. But the first step before anything is to first make sure you have BakkesMod installed!
  - Download and install [Bakkesmod](https://www.bakkesmod.com/). 
- - **FINAL INSTALL DETAILS PENDING RELEASE**.
+### Through In-Game Plugin Manager
+ - While at the main menu - Press **F2** to open the BakkesMod window
+ - Select the **Plugins tab**
+ - Select **Plugin Manager** located at the top of the list on the left and click the **open button**.
+ - In the top right in the ID textbox - enter **274** and click **Install by ID**
+ - That's it the plugin is now installed! Happy Peaking!
+
+### BakkesPlugins Website
+ - Visit the [PeakTracker plugin page](https://bakkesplugins.com/plugins/view/274).
+ - Click the **Install with BakkesMod** button and follow the instructions
+ - That's it the plugin is now installed! Happy Peaking!
 
 ## Additional Information & Features
 PeakTracker initially will set your peak to your current MMR for each gamemode (Values are pulled at the start and end of matches). As your MMR changes, your peak (highest obtained) MMR will be saved and only update once you've reached a higher MMR!
