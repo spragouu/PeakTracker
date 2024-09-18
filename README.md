@@ -2,7 +2,7 @@
 <br />
 <p align="center">
   <a href="https://bakkesplugins.com/plugins/view/274">
-    <img src="https://media.discordapp.net/attachments/720041712390635628/874468669030268928/Webp.net-resizeimage_1.png?width=683&height=683" alt="Logo" width="220" height="200">
+    <img src="https://bp-prod.nyc3.digitaloceanspaces.com/uploads/24655_f0ad72e2e1e989827b3489c161b7016f667c0160bc4eb782666f151de26c5768.png" alt="Logo" width="220" height="200">
   </a>
 
   <h3 align="center">PeakTracker</h3>
